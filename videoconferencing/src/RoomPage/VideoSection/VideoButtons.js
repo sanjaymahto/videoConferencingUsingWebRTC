@@ -1,17 +1,27 @@
-import React from 'react'
-import CameraButton from './CameraButton';
-import LeaveRoomButton from './LeaveRoomButton';
-import MicButton from './MicButton';
-import SwitchToScreenSharingButton from './SwitchToScreenSharingButton';
-
+import React from "react";
+import CameraButton from "./CameraButton";
+import LeaveRoomButton from "./LeaveRoomButton";
+import MicButton from "./MicButton";
+import SwitchToScreenSharingButton from "./SwitchToScreenSharingButton";
+import { connect } from "react-redux";
 
 const VideoButtons = (props) => {
-  return <div className="video_buttons_container">
-  <MicButton />
-  <CameraButton /> 
-  <LeaveRoomButton />
-  <SwitchToScreenSharingButton />
-  </div>;
+  const { connectOnlyWithAudio } = props;
+
+  return (
+    <div className="video_buttons_container">
+      <MicButton />
+      {!connectOnlyWithAudio && <CameraButton />}
+      <LeaveRoomButton />
+      {!connectOnlyWithAudio && <SwitchToScreenSharingButton />}
+    </div>
+  );
 };
 
-export default VideoButtons;
+const mapStoreStateToProps = (state) => {
+  return {
+    ...state,
+  };
+};
+
+export default connect(mapStoreStateToProps)(VideoButtons);

@@ -8,10 +8,9 @@ import { connectWithSocketIOServer } from "./utils/wss";
 import "./App.css";
 
 function App() {
-
   useEffect(() => {
-    connectWithSocketIOServer()
-  }, [])
+    connectWithSocketIOServer();
+  }, []);
 
   return (
     <Router>

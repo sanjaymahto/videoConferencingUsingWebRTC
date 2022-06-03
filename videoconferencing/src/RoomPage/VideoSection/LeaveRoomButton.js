@@ -1,18 +1,18 @@
-import React, { useState } from 'react'
+import React from "react";
 
-const LeaveRoomButton = (props) => {
-    const [isLocalVideoDisabled, setIsLocalVideoDisabled] = useState(false)
+const LeaveRoomButton = () => {
+  const handleRoomDisconnection = () => {
+    const siteUrl = window.location.origin;
+    window.location.href = siteUrl;
+  };
 
-    const handleRoomDisconnection = () => {
-        const siteUrl = window.location.origin
-        setIsLocalVideoDisabled(!isLocalVideoDisabled)
-    }
-
-    return <div className="video_button_container">
-        <button className="video_button_end" onclick={handleRoomDisconnection}>
-            Leave Room
-        </button>
+  return (
+    <div className="video_button_container">
+      <button className="video_button_end" onClick={handleRoomDisconnection}>
+        Leave Room
+      </button>
     </div>
+  );
 };
 
 export default LeaveRoomButton;
