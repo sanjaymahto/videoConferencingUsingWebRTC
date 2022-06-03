@@ -38,6 +38,49 @@ const io = require("socket.io")(server, {
   },
 });
 
+io.on('connection', (socket) => {
+  console.log('User connected', socket.id)
+
+  socket.on('create-new-room', (data) => {
+    createNewRoomHandler(data, socket)
+  })
+
+  socket.on('join-room', (data) => {
+    console.log(`Host is Joining Room`)
+    console.log(data)
+  })
+})
+
+const createNewRoomHandler = (data, socket) => {
+  console.log(`Host is creating new Room`)
+  console.log(data)
+  const { identity } = data
+  const roomId = uuidv4()
+  // create new user
+  const newUser = {
+    identity,
+    id: uuidv4(),
+    socketId: socket.id,
+    roomId
+  }
+  // push that user to connected Users
+  connectedUsers = [...connectedUsers, newUser];
+
+  // Create New Room
+  const newRoom = {
+    id: roomId,
+    connectedUsers: [newUser]
+  }
+  // join socket.io room
+  socket.join(roomId)
+  rooms = [...rooms, newRoom]
+
+  // emit to that client which connected that room roomId
+
+  // emit an event to all users to connected to that room
+  //  about new Users which are right now in this room
+}
+
 server.listen(PORT, () => {
   console.log(`Server is listening on ${PORT}`);
 });
