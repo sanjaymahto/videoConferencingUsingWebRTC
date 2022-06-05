@@ -1,22 +1,23 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
+import MicButtonImg from "../../resources/images/mic.svg";
+import MicButtonImgOff from "../../resources/images/micOff.svg";
 
-import Mic from '../../resources/images/mic.svg'
-import MicOff from '../../resources/images/micOff.svg'
+const MicButton = () => {
+  const [isMicMuted, setIsMicMuted] = useState(false);
 
-const MicButton = (props) => {
-    const [isMicMuted, setMicMute] = useState(false)
+  const handleMicButtonPressed = () => {
+    setIsMicMuted(!isMicMuted);
+  };
 
-    const handleMicButton = () => {
-        setMicMute(!isMicMuted)
-    }
-
-    return <div className="video_button_container">
-        <img src={isMicMuted ? MicOff : Mic}
-            alt="Mic Button"
-            onClick={handleMicButton}
-            className="video_button_image"
-        />
+  return (
+    <div className="video_button_container">
+      <img
+        src={isMicMuted ? MicButtonImgOff : MicButtonImg}
+        onClick={handleMicButtonPressed}
+        className="video_button_image"
+      />
     </div>
+  );
 };
 
 export default MicButton;
