@@ -37,7 +37,7 @@
 .new_message_input {
   border: 1px solid #d1dbe2;
   border-radius: 60px;
-  padding: 0 50px 0px 20px;
+  padding: 0 20px;
   height: 60px;
   font-size: 16px;
   width: 80%;
@@ -157,6 +157,43 @@
   flex-direction: column;
   align-content: flex-start;
   height: 50%;
+}
+
+.direct_chat_container {
+  height: 45%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.direct_chat_header {
+  height: 50px;
+  background: linear-gradient(168.68deg, #0052c9 1.12%, #0a91db 100%);
+  width: 95%;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.direct_chat_header_paragraph {
+  color: white;
+  font-size: 16px;
+}
+
+.new_message_direct_border {
+  border-left: 1px solid #e5e5e5;
+  border-right: 1px solid #e5e5e5;
+  width: 95%;
+}
+
+.direct_messages_container {
+  flex-grow: 1;
+  width: 95%;
+  border-left: 1px solid #e5e5e5;
+  border-right: 1px solid #e5e5e5;
 }
 
 .participants_paragraph {
@@ -347,35 +384,30 @@ video {
 .video_track_container:first-child:nth-last-child(1) {
   width: 100%;
   height: 100%;
-  position: relative;
 }
 
 .video_track_container:first-child:nth-last-child(2),
 .video_track_container:first-child:nth-last-child(2) ~ .video_track_container {
   width: 50%;
   height: 50%;
-  position: relative;
 }
 
 .video_track_container:first-child:nth-last-child(3),
 .video_track_container:first-child:nth-last-child(3) ~ .video_track_container {
   width: 50%;
   height: 50%;
-  position: relative;
 }
 
 .video_track_container:first-child:nth-last-child(4),
 .video_track_container:first-child:nth-last-child(4) ~ .video_track_container {
   width: 50%;
   height: 50%;
-  position: relative;
 }
 
 .video_track_container:first-child:nth-last-child(5),
 .video_track_container:first-child:nth-last-child(5) ~ .video_track_container {
   width: 33%;
   height: 33%;
-  position: relative;
 }
 
 .video_track_container:first-child:nth-last-child(6),
@@ -416,121 +448,4 @@ video {
   height: 100%;
   top: 0%;
   left: 0%;
-}
-
-.label_only_audio_container {
-  width: 100%;
-  height: 100%;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: 0%;
-  left: 0%;
-}
-
-.label_only_audio_container {
-  font-size: 18px;
-  color: black;
-}
-
-.direct_chat_container {
-  height: 45%;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  width: 100%;
-  position: relative;
-}
-
-.direct_chat_header {
-  height: 50px;
-  background: linear-gradient(168.68deg, #0052c9 1.12%, #0a91db 100%);
-  width: 95%;
-  border-top-left-radius: 25px;
-  border-top-right-radius: 25px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.direct_chat_header_paragraph {
-  color: white;
-  font-size: 16px;
-}
-
-.new_message_direct_border {
-  border-left: 1px solid #e5e5e5;
-  border-right: 1px solid #e5e5e5;
-  width: 95%;
-}
-
-.direct_messages_container {
-  flex-grow: 1;
-  width: 95%;
-  border-left: 1px solid #e5e5e5;
-  border-right: 1px solid #e5e5e5;
-  display: flex;
-  flex-direction: column;
-  overflow: auto;
-}
-
-.conversation_not_chosen_overlay {
-  width: 95%;
-  height: 86%;
-  bottom: 0;
-  left: 2%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0.6;
-  position: absolute;
-}
-
-.conversation_not_chosen_overlay_text {
-  font-size: 16px;
-  font-weight: 700;
-  color: black;
-  margin-bottom: 80px;
-}
-
-.direct_message_container_author {
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.direct_message_container_receiver {
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-}
-
-.author_direct_message {
-  background: linear-gradient(168.68deg, #0052c9 1.12%, #0a91db 100%);
-  float: right;
-  border-radius: 8px 8px 0px 8px;
-  padding: 13px;
-  margin-right: 5px;
-  color: white;
-  display: inline;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  font-size: 14px;
-  margin-left: 5px;
-}
-
-.receiver_direct_message {
-  border-radius: 8px 8px 8px 0px;
-  border: 1px solid #d5deeb;
-  background: #ffffff;
-  padding: 13px;
-  float: left;
-  margin-left: 5px;
-  display: inline;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  font-size: 14px;
-  margin-right: 5px;
 }
