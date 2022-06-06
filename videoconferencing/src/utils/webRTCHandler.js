@@ -61,7 +61,7 @@ export const prepareNewPeerConnection = (connUserSocketId, isInitiator) => {
   });
 
   peers[connUserSocketId].on("signal", (data) => {
-    // webRTC offer, webRTC Answer (SDP informations), ice candidates
+    // webRTC offer, webRTC Answer (SDP (Session description protocol) informations), ice candidates
 
     const signalData = {
       signal: data,
@@ -156,11 +156,11 @@ const addStream = (stream, connUserSocketId) => {
 /////////////////////////////////////////////BUTTONS LOGIC ///////////////////////////////////////////////////////////
 
 export const toggleMic = (ismuted) => {
-  localStream.getAudioTracks()[0].enabled = ismuted ? true : false
+  localStream.getAudioTracks()[0].enabled = ismuted 
 }
 
 export const toggleCameraButton = (isDisabled) => {
-  localStream.getVideoTracks()[0].enabled = isDisabled ? true: false
+  localStream.getVideoTracks()[0].enabled = isDisabled
 }
 
 export const toggleScreenShare = (

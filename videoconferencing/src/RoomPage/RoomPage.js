@@ -22,7 +22,7 @@ const RoomPage = ({ roomId, identity, isRoomHost, showOverlay }) => {
     <div className="room_container">
       <ParticipantsSection />
       <VideoSection />
-      <ChatSection />
+      {/* <ChatSection /> */}
       <RoomLabel roomId={roomId} />
       {showOverlay && <Overlay />}
     </div>
