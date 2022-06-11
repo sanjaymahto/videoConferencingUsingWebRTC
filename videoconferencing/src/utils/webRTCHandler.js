@@ -11,15 +11,24 @@ const defaultConstraints = {
   },
 };
 
+const onlyAudioConstraints = {
+  audio: true,
+  video: false
+}
+
 let localStream;
 
 export const getLocalPreviewAndInitRoomConnection = async (
   isRoomHost,
   identity,
-  roomId = null
+  roomId = null,
+  onlyAudio
 ) => {
+
+  const constraints = onlyAudio ? onlyAudioConstraints : defaultConstraints
+
   navigator.mediaDevices
-    .getUserMedia(defaultConstraints)
+    .getUserMedia(constraints)
     .then((stream) => {
       console.log("successfuly received local stream");
       localStream = stream;
@@ -28,7 +37,7 @@ export const getLocalPreviewAndInitRoomConnection = async (
       // dispatch an action to hide overlay
       store.dispatch(setShowOverlay(false));
 
-      isRoomHost ? wss.createNewRoom(identity) : wss.joinRoom(identity, roomId);
+      isRoomHost ? wss.createNewRoom(identity, onlyAudio) : wss.joinRoom(identity, roomId, onlyAudio);
     })
     .catch((err) => {
       console.log(
@@ -122,6 +131,11 @@ const showLocalVideoPreview = (stream) => {
   };
 
   videoContainer.appendChild(videoElement);
+
+  if (store.getState().connectOnlyWithAudio) {
+    videoContainer.appendChild(getAudioOnlyLabel())
+  }
+
   videosContainer.appendChild(videoContainer);
 };
 
@@ -150,13 +164,34 @@ const addStream = (stream, connUserSocketId) => {
   });
 
   videoContainer.appendChild(videoElement);
+
+  //check if other users connected only with Audio
+  const participants = store.getState().participants
+  const participant = participants.find(p => p.socketId === connUserSocketId)
+
+  if (participant?.onlyAudio) {
+    videoContainer.appendChild(getAudioOnlyLabel(participant.identity))
+  }
+
   videosContainer.appendChild(videoContainer);
 };
+
+const getAudioOnlyLabel = (identity= '') => {
+  const labelContainer = document.createElement('div')
+  labelContainer.classList.add('label_only_audio_container')
+
+  const label = document.createElement('p')
+  label.classList.add('label_only_audio_text')
+  label.innerHTML = `Only Audio ${identity}`
+
+  labelContainer.appendChild(label)
+  return labelContainer
+}
 
 /////////////////////////////////////////////BUTTONS LOGIC ///////////////////////////////////////////////////////////
 
 export const toggleMic = (ismuted) => {
-  localStream.getAudioTracks()[0].enabled = ismuted 
+  localStream.getAudioTracks()[0].enabled = ismuted
 }
 
 export const toggleCameraButton = (isDisabled) => {
